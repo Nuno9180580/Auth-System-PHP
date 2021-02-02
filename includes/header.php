@@ -1,8 +1,19 @@
 <?php
+session_start();
 require_once 'includes/database.php';
 require_once 'includes/register-inc.php';
-require_once 'includes/login-inc.php';
+
+$loginLayout = "";
+$logoutLayout = "";
+if (isset($_SESSION['sessionId'])) {
+    $loginLayout = "style='display:none;'";
+    $logoutLayout = "style='display:block;'";
+} else {
+    $loginLayout = "style='display:block;'";
+    $logoutLayout = "style='display:none;'";
+}
 ?>
+
 <html lang="en">
 
 <head>
@@ -15,10 +26,18 @@ require_once 'includes/login-inc.php';
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="index.php">HOME</a></li>
-                <li><a href="login.php">LOGIN</a></li>
-                <li><a href="register.php">REGISTER</a></li>
-            </ul>
+            <div <?php echo $loginLayout; ?>>
+                <ul>
+                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="login.php">LOGIN</a></li>
+                    <li><a href="register.php">REGISTER</a></li>
+                </ul>
+            </div>
+            <div <?php echo $logoutLayout; ?>>
+                <ul>
+                    <li><a href="index.php">HOME</a></li>
+                    <li><a href="logout.php">LOGOUT</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
